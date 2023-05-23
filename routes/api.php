@@ -21,11 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/weather', function() {
-    $lat = request('lat');
-    $lon = request('lon');
+    $name = request('q');
     $apiKey = Config::get('services.openweathermap.key');
 
-    $response = Http::get("https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&exclude=current&appid=$apiKey");
+    $response = Http::get("https://api.openweathermap.org/data/2.5/weather?q=$name&units=imperial&appid=$apiKey");
 
     return $response->json();
 });
